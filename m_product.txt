@@ -1,0 +1,7 @@
+pr_id,pr_name,pr_unit,pr_size,pr_package_type,pr_brand
+1,corn flakes kellogs 300g,kg,0.3,box,kellogs
+2,corn flakes kellogs 600g,kg,0.6,box,kellogs
+3,beer gosser 0.5 liter can,liter,0.5,can,gosser
+4,beer gosser 0.5 liter bottle,liter,0.5,bottle,gosser
+5,beer puntigamer 0.33 liter bottle,liter,0.33,bottle,puntigamer
+6,beer sagres 0.2 liter bottle,liter,0.2,bottle,sagres
