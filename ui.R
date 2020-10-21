@@ -1,6 +1,6 @@
 
 library (shiny)
-library (shinyjs)
+#library (shinyjs)
 library (dplyr)
 library (ggplot2)
 library (grid)
