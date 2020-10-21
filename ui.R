@@ -15,7 +15,7 @@ names ( myFill ) <- myPerson
 shinyUI (
     fluidPage(
         
-        useShinyjs(), 
+        #useShinyjs(), 
         
         titlePanel ("Supermarket example using RStudio, Shiny Apps, GitHub, and Heroku"),
     
@@ -51,7 +51,7 @@ shinyUI (
                         multiple = TRUE
                     ),
                     
-                    actionButton ("btnResetFilters", "Reset filters")
+                    #actionButton ("btnResetFilters", "Reset filters")
                 ),
                 
                 wellPanel (
