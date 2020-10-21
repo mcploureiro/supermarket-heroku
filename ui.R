@@ -1,21 +1,8 @@
 
-# library (shiny)
-# #library (shinyjs)
-# library (dplyr)
-# library (ggplot2)
-# library (grid)
-# library (gridExtra)
-# library (DT)
-# 
-# myData <- read.csv ( "myJoin2.txt" ) 
-# myPerson <- unique(myData$pe_name) #),"") #), levels=c(unique(myData$pe_name),"") )
-# myFill <- c ( "chocolate3", "paleturquoise3", "seagreen4") #, "white")
-# names ( myFill ) <- myPerson
-
 shinyUI (
     fluidPage(
         
-        #useShinyjs(), 
+        useShinyjs(), 
         
         titlePanel ("Supermarket example using RStudio, Shiny Apps, GitHub, and Heroku"),
     
@@ -51,7 +38,7 @@ shinyUI (
                         multiple = TRUE
                     ),
                     
-                    #actionButton ("btnResetFilters", "Reset filters")
+                    actionButton ("btnResetFilters", "Reset filters")
                 ),
                 
                 wellPanel (

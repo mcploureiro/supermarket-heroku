@@ -1,17 +1,4 @@
 
-# library (shiny)
-# #library (shinyjs)
-# library (dplyr)
-# library (ggplot2)
-# library (grid)
-# library (gridExtra)
-# library (DT)
-# 
-# myData <- read.csv ( "myJoin2.txt" ) 
-# myPerson <- unique(myData$pe_name) #),"") #), levels=c(unique(myData$pe_name),"") )
-# myFill <- c ( "chocolate3", "paleturquoise3", "seagreen4") #, "white")
-# names ( myFill ) <- myPerson
-
 shinyServer (function(input, output) {
 
     ##########################################################################################################################
@@ -106,51 +93,13 @@ shinyServer (function(input, output) {
             xlab ( "SUM of expenses (Euro)" ) +
             theme ( plot.margin=unit(c(1,2,1,0),"cm"), legend.position="none" ) +
             scale_fill_manual ( values=myFill )
+            
+        myPlot1 <- myPlot1 + scale_x_continuous ( limits=c(0,mySum()), expand=c(0,0) )
+        myPlot2 <- myPlot2 + scale_x_continuous ( limits=c(0,mySum()), expand=c(0,0) )
+        myPlot3 <- myPlot3 + scale_x_continuous ( limits=c(0,mySum()), expand=c(0,0) )
         
-        # if ( mySmartFit()==FALSE ) {
-        #     
-        #     myPlot1 <- myPlot1 + scale_x_continuous ( limits=c(0,NA), expand=c(0,0) )
-        #     myPlot2 <- myPlot2 + scale_x_continuous ( limits=c(0,NA), expand=c(0,0) )
-        #     myPlot3 <- myPlot3 + scale_x_continuous ( limits=c(0,NA), expand=c(0,0) )
-        #     grid.arrange ( myPlot1, myPlot2, myPlot3, nrow=3 )
-        #     
-        # } else {
-            
-            myPlot1 <- myPlot1 + scale_x_continuous ( limits=c(0,mySum()), expand=c(0,0) )
-            myPlot2 <- myPlot2 + scale_x_continuous ( limits=c(0,mySum()), expand=c(0,0) )
-            myPlot3 <- myPlot3 + scale_x_continuous ( limits=c(0,mySum()), expand=c(0,0) )
-            
-            g <- rbind ( ggplotGrob(myPlot1), ggplotGrob(myPlot2), ggplotGrob(myPlot3) )
-            #g <- rbind ( ggplotGrob(myPlot2) )
-            
-            # b <<- grid::unitType ( g$heights ) == "points"
-            # 
-            # m <<- matrix ( b, nrow=12, ncol=3, byrow=FALSE )
-            
-            # g$heights[1]  <- units::as_units (20) #, value="points")
-            # g$heights[11] <- units::as_units (20) #, value="points")
-            # g$heights[12] <- units::as_units (20) #, value="points")
-            
-            # # https://stackoverflow.com/questions/36198451/specify-widths-and-heights-of-plots-with-grid-arrange/36198587
-            # set_panel_heights <- function (g, heights) {
-            #     #g$heights <- grid::unitType(g$heights) #unit.list(g$heights) 
-            #     id_panels <- unique(g$layout[g$layout$name=="panel", "t"])
-            #     g$heights[id_panels] <- heights
-            #     g
-            # }
-            # 
-            # g <- set_panel_heights (g, lapply(1:3, grid::unit, "null"))
-            
-            grid::grid.draw ( g ) #, size="last" ) 
-            
-            
-            # grid::grid.newpage()
-            # g <- do.call ( rbind, c(ggplotGrob(myPlot1), ggplotGrob(myPlot2), ggplotGrob(myPlot3)) )
-            # #g <- set_panel_heights (g, list(unit(1,"in"), unit(1,"in"), unit(1,"in")))
-            # grid::grid.draw(g) 
-            
-            #grid.draw ( g , size="last" )
-        #}
+        g <- rbind ( ggplotGrob(myPlot1), ggplotGrob(myPlot2), ggplotGrob(myPlot3) )
+        grid::grid.draw ( g )
         
     })
     
@@ -162,9 +111,7 @@ shinyServer (function(input, output) {
         myExpansion <<- 
             data.frame ( ss_date = seq.Date ( as.Date(min(myData$ss_date)), as.Date(max(myData$ss_date)), by="day" ) ) %>%
             left_join ( mySum_byDayPerson %>% mutate ( ss_date = as.Date(ss_date) ), by="ss_date" ) %>%
-            within ( mySum[is.na(mySum)] <- 0 ) #%>%
-            #within ( pe_name[is.na(pe_name)] <- "" ) #%>%
-            #mutate ( pe_name = factor ( pe_name, levels=c(unique(myData$pe_name),"") ) )
+            within ( mySum[is.na(mySum)] <- 0 ) 
         myPlot4 <-
             ggplot ( data=myExpansion, aes(x=ss_date,y=mySum,fill=pe_name) ) +
             geom_col () +
@@ -174,13 +121,7 @@ shinyServer (function(input, output) {
             ylab ("SUM of expenses (Euro)") +
             theme (plot.margin=unit(c(1,0,3,0),"cm") ) +
             scale_fill_manual ( values=myFill, name="", na.translate=FALSE )
-        
-        # if ( mySmartFit()==FALSE ) {
-        #     myPlot4 <- myPlot4 + scale_y_continuous ( limits=c(0,NA),      expand=c(0,0) )
-        # } else {
-            myPlot4 <- myPlot4 + scale_y_continuous ( limits=c(0,mySum()), expand=c(0,0) )
-        #}
-        
+        myPlot4 <- myPlot4 + scale_y_continuous ( limits=c(0,mySum()), expand=c(0,0) )
         return ( myPlot4 )
     })
     
@@ -199,4 +140,3 @@ shinyServer (function(input, output) {
     })
     
 })
-
