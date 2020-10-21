@@ -38,7 +38,7 @@ shinyUI (
                         multiple = TRUE
                     ),
                     
-                    #actionButton ("btnResetFilters", "Reset filters")
+                    actionButton ("btnResetFilters", "Reset filters")
                 ),
                 
                 wellPanel (
