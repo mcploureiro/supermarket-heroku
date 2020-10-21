@@ -2,7 +2,7 @@
 shinyUI (
     fluidPage(
         
-        #useShinyjs(), 
+        useShinyjs(), 
         
         titlePanel ("Supermarket example using RStudio, Shiny Apps, GitHub, and Heroku"),
     

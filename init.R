@@ -3,7 +3,7 @@
 # Example R code to install packages if not already installed
 #
 
-my_packages = c("shiny", "dplyr", "ggplot2", "grid", "gridExtra", "DT")
+my_packages = c("shiny", "dplyr", "ggplot2", "grid", "gridExtra", "DT", "shinyjs")
 
 install_if_missing = function(p) {
     if (p %in% rownames(installed.packages()) == FALSE) {
